@@ -1,0 +1,45 @@
+{{- range .Values.applications}}
+{{- with . }}
+{{- if (eq .enabled true)}}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    name: {{ .name }}
+    finalizers:
+        - "resources-finalizer.argocd.argoproj.io"
+    annotations:
+        notifications.argoproj.io/subscribe.on-created.grafana: "{{ .name }} | created"
+        notifications.argoproj.io/subscribe.on-deleted.grafana: "{{ .name }} | deleted"
+        notifications.argoproj.io/subscribe.on-deployed.grafana: "{{ .name }} | deployed"
+        notifications.argoproj.io/subscribe.on-health-degraded.grafana: "{{ .name }} | degraded"
+        notifications.argoproj.io/subscribe.on-sync-failed.grafana: "{{ .name }} | sync-failed"
+        notifications.argoproj.io/subscribe.on-sync-running.grafana: "{{ .name }} | sync-running"
+        notifications.argoproj.io/subscribe.on-sync-status-unknown.grafana: "{{ .name }} | sync-status-unknown"
+        notifications.argoproj.io/subscribe.on-sync-succeeded.grafana: "{{ .name }} | sync-succeeded"
+spec:
+    destination:
+        {{- if (.destination.namespace ) }}
+        namespace: {{ .destination.namespace }}
+        {{- end }}
+        server: 'https://kubernetes.default.svc'
+    project: {{ default "default" $.Values.project.name }}
+    source:
+        {{ toYaml .source | indent 4 }}
+{{- if .ignoreDifferences }}
+ignoreDifferences:
+    {{ toYaml .ignoreDifferences | indent 4 }}
+{{- end }}
+syncPolicy:
+    {{- if .syncPolicy.automated }}
+    automated:
+        prune: {{ .syncPolicy.automated.prune }}
+        selfHeal: {{ .syncPolicy.automated.selfHeal }}
+    {{- end }}
+    syncOptions:
+        - CreateNamespace={{ .destination.create }}
+      - Replace={{ default "false"  .syncPolicy.replace }}
+        ...
+{{- end }}
+{{- end }}
+{{- end }}
