@@ -47,7 +47,9 @@ certManager:
             prune: true
             selfHeal: true
 
-        
+
+
+
 
 ##################### CERTIFICATES-PATCHES ######################
 #certificatesPatches:
