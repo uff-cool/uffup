@@ -28,7 +28,7 @@ spec:
         {{ toYaml .source | indent 4 }}
 {{- if .ignoreDifferences }}
 ignoreDifferences:
-    {{ toYaml .ignoreDifferences | indent 4 }}
+{{ toYaml .ignoreDifferences | indent 4 }}
 {{- end }}
 syncPolicy:
     {{- if .syncPolicy.automated }}
@@ -38,8 +38,8 @@ syncPolicy:
     {{- end }}
     syncOptions:
         - CreateNamespace={{ .destination.create }}
-      - Replace={{ default "false"  .syncPolicy.replace }}
-        ...
+        - Replace={{ default "false"  .syncPolicy.replace }}
+...
 {{- end }}
 {{- end }}
 {{- end }}
