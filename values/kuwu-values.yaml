@@ -3,22 +3,36 @@ project:
     name: kuwu
 
 applications:
+  ####################### Multena Instance ######################
+  multena:
+    name: multena
+    enabled: true
+    argoProject: gepaplexx
+    destination:
+      namespace: multena
+      create: true
+    source:
+      repoURL: "https://gepaplexx.github.io/gp-helm-chart-development/"
+      targetRevision: "*"
+      chart: "gp-multena-instance"
+    syncPolicy: {}
+    
     ################## PATCH OPERATOR #############################
-    patchOperator:
-        name: patch-operator
-        enabled: true
-        argoProject: kuwu
-        destination:
-            namespace: openshift-operators
-            create: true
-        source:
-            repoURL: "https://gepaplexx.github.io/gp-helm-charts/"
-            chart: gp-patch-operator
-            targetRevision: "*"
-        syncPolicy:
-            automated:
-                prune: true
-                selfHeal: true
+  patchOperator:
+      name: patch-operator
+      enabled: true
+      argoProject: kuwu
+      destination:
+        namespace: openshift-operators
+        create: true
+      source:
+        repoURL: "https://gepaplexx.github.io/gp-helm-charts/"
+        chart: gp-patch-operator
+        targetRevision: "*"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
                 
                 
     uff-mc:
