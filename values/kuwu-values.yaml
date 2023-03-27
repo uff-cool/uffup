@@ -7,7 +7,7 @@ applications:
     patchOperator:
         name: patch-operator
         enabled: true
-        argoProject: gepaplexx
+        argoProject: kuwu
         destination:
             namespace: openshift-operators
             create: true
@@ -15,6 +15,23 @@ applications:
             repoURL: "https://gepaplexx.github.io/gp-helm-charts/"
             chart: gp-patch-operator
             targetRevision: "*"
+        syncPolicy:
+            automated:
+                prune: true
+                selfHeal: true
+                
+                
+    uff-mc:
+        name: uff-mc
+        enabled: true
+        argoProject: kuwu
+        destination:
+            namespace: uff-mc
+            create: true
+        source:
+            repoURL: "https://github.com/uff-cool/uff-mc"
+            path: .
+            targetRevision: HEAD
         syncPolicy:
             automated:
                 prune: true
