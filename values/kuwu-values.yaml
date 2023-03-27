@@ -35,26 +35,26 @@ applications:
           selfHeal: true
                 
                 
-    uff-mc:
-        name: uff-mc
-        enabled: true
-        argoProject: kuwu
-        destination:
-            namespace: uff-mc
-            create: true
-        source:
-            repoURL: "https://github.com/uff-cool/uff-mc"
-            path: .
-            targetRevision: HEAD
-        syncPolicy:
-            automated:
-                prune: true
-                selfHeal: true
+  uff-mc:
+    name: uff-mc
+    enabled: true
+    argoProject: kuwu
+    destination:
+      namespace: uff-mc
+      create: true
+    source:
+      repoURL: "https://github.com/uff-cool/uff-mc"
+      path: .
+      targetRevision: HEAD
+    syncPolicy:
+      automated:
+         prune: true
+         selfHeal: true
 
 
 
     ##################### CERT-MANAGER ######################
-    certManager:
+  certManager:
         name: cert-manager
         enabled: true
         argoProject: kuwu
