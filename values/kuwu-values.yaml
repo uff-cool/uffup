@@ -7,7 +7,7 @@ applications:
   multena:
     name: multena
     enabled: true
-    argoProject: gepaplexx
+    argoProject: kuwu
     destination:
       namespace: multena
       create: true
