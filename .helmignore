@@ -22,8 +22,3 @@
 *.tmproj
 .vscode/
 .fleet
-
-argocd app create mc \
-  --jsonnet-ext-var-str 'app=mc' \
-  --jsonnet-tla-str 'ns=mc' \
-  --jsonnet-libs 'vendor'
