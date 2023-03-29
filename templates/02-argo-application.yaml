@@ -8,6 +8,7 @@ metadata:
     name: {{ .name }}
     finalizers:
         - "resources-finalizer.argocd.argoproj.io"
+    namespace: openshift-gitops
     annotations:
         notifications.argoproj.io/subscribe.on-created.grafana: "{{ .name }} | created"
         notifications.argoproj.io/subscribe.on-deleted.grafana: "{{ .name }} | deleted"
