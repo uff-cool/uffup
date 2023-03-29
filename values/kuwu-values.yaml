@@ -16,7 +16,7 @@ applications:
       targetRevision: "*"
       chart: "gp-multena-instance"
     syncPolicy: {}
-    
+
     ################## PATCH OPERATOR #############################
   patchOperator:
       name: patch-operator
@@ -33,8 +33,8 @@ applications:
         automated:
           prune: true
           selfHeal: true
-                
-                
+
+
   uff-mc:
     name: uff-mc
     enabled: true
@@ -43,8 +43,11 @@ applications:
       namespace: uff-mc
       create: true
     source:
-      repoURL: "https://github.com/uff-cool/uff-mc"
+      helm:
+        valueFiles:
+          - ./values/servers.yaml
       path: .
+      repoURL: 'https://github.com/uff-cool/uff-mc'
       targetRevision: HEAD
     syncPolicy:
       automated:
@@ -54,7 +57,7 @@ applications:
 
 
     ##################### CERT-MANAGER ######################
-  certManager:
+    certManager:
         name: cert-manager
         enabled: true
         argoProject: kuwu
