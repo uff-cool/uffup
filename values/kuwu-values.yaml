@@ -54,7 +54,24 @@ applications:
          prune: true
          selfHeal: true
 
-
+  uff-minio:
+    name: uff-minio
+    enabled: true
+    argoProject: kuwu
+    destination:
+      namespace: uff-minio
+      create: true
+    source:
+      helm:
+        valueFiles:
+          - ./values.yaml
+      path: .
+      repoURL: 'https://github.com/uff-cool/uff-minio'
+      targetRevision: HEAD
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
 
   ##################### CERT-MANAGER ######################
   #certManager:
